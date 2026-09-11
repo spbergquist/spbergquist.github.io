@@ -39,6 +39,20 @@ plugins:
   - jekyll-seo-tag    # page titles and link previews (LinkedIn, email)
   - jekyll-sitemap    # a list of pages for search engines
 
+# The three kinds of entry. Each file in _studies, _guides or _apps
+# becomes its own page, at the address shown, and is laid out by the
+# matching template in _layouts (study, guide or app).
+collections:
+  studies:
+    output: true
+    permalink: /research/:name/
+  guides:
+    output: true
+    permalink: /guides/:name/
+  apps:
+    output: true
+    permalink: /apps/:name/
+
 exclude:
   - README.md
   - CNAME
@@ -52,3 +66,21 @@ defaults:
       path: ""
     values:
       layout: default
+  - scope:
+      path: ""
+      type: studies
+    values:
+      layout: study
+      section: research
+  - scope:
+      path: ""
+      type: guides
+    values:
+      layout: guide
+      section: guides
+  - scope:
+      path: ""
+      type: apps
+    values:
+      layout: app
+      section: apps

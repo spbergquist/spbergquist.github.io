@@ -1,0 +1,92 @@
+---
+layout: default
+---
+{%- comment -%}
+  Research entry. One Markdown file per study, in _studies/.
+  The front matter carries the facts shown at the top of the page; the
+  body carries Method, Results, Limitations and Sources as ## headings.
+  Studies set their running text in IBM Plex Serif, the site's serif for
+  research papers and technical reports.
+{%- endcomment -%}
+<article class="wrap entry entry--study pairing-sans-serif">
+  <header class="page-head entry-head">
+    <p class="entry-kicker"><a href="{{ '/research/' | relative_url }}">Research</a><span aria-hidden="true"> · </span>{{ page.kind | default: 'Study' }}</p>
+    <h1 class="page-title">{{ page.title }}</h1>
+    {%- if page.authors %}
+    <p class="entry-byline">
+      {%- for author in page.authors -%}
+      <span class="entry-author">{{ author.name }}{% if author.affiliation %}<span class="entry-affiliation">, {{ author.affiliation }}</span>{% endif %}</span>
+      {%- unless forloop.last %}<span class="entry-sep">; </span>{% endunless -%}
+      {%- endfor -%}
+    </p>
+    {%- endif %}
+    <p class="entry-meta">
+      {%- if page.status %}
+      <span class="status">{{ page.status }}</span>
+      {%- endif %}
+      <span><time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: "%-d %B %Y" }}</time></span>
+    </p>
+  </header>
+
+  {% include sample-notice.html %}
+
+  {%- if page.description %}
+  <section class="entry-summary" aria-labelledby="summary-label">
+    <h2 class="entry-label" id="summary-label">Summary</h2>
+    {{ page.description | markdownify }}
+  </section>
+  {%- endif %}
+
+  {%- if page.apps or page.reference_method or page.document or page.doi %}
+  <dl class="entry-facts">
+    {%- if page.apps %}
+    <dt>App{% if page.apps.size > 1 %}s{% endif %} tested</dt>
+    <dd>
+      {%- for item in page.apps -%}
+      {%- assign app = nil -%}
+      {%- if item.id -%}{%- assign app = site.apps | where: "slug", item.id | first -%}{%- endif -%}
+      {%- if app %}<a href="{{ app.url | relative_url }}">{{ app.title }}</a>{% else %}{{ item.id }}{% endif %}{% if item.version %}, version {{ item.version }}{% endif %}
+      {%- unless forloop.last %}; {% endunless -%}
+      {%- endfor -%}
+    </dd>
+    {%- endif %}
+    {%- if page.reference_method %}
+    <dt>Compared against</dt>
+    <dd>{{ page.reference_method }}</dd>
+    {%- endif %}
+    {%- if page.document %}
+    <dt>Full study</dt>
+    <dd><a href="{{ page.document | relative_url }}">{{ page.document_label | default: 'Download the full study' }}</a></dd>
+    {%- endif %}
+    {%- if page.doi %}
+    <dt>Journal version</dt>
+    <dd><a href="https://doi.org/{{ page.doi }}">doi:{{ page.doi }}</a></dd>
+    {%- endif %}
+  </dl>
+  {%- endif %}
+
+  {%- if page.threshold %}
+  <section class="entry-callout" aria-labelledby="threshold-label">
+    <h2 class="entry-label" id="threshold-label">What counts as a pass</h2>
+    {{ page.threshold | markdownify }}
+    <p class="entry-callout__note">
+      {%- if page.threshold_date %}Set on <time datetime="{{ page.threshold_date | date: '%Y-%m-%d' }}">{{ page.threshold_date | date: "%-d %B %Y" }}</time>. {% endif -%}
+      Every change to this page is kept in <a href="{{ site.github.repository_url }}/commits/{{ site.github.source.branch | default: 'main' }}/{{ page.path }}">its public edit history</a>.</p>
+  </section>
+  {%- endif %}
+
+  {%- if page.status == "In progress" %}
+  <p class="entry-pending">No results yet. They are added here when the study ends{% if page.threshold %}, and judged against the pass threshold above{% endif %}.</p>
+  {%- endif %}
+
+  <div class="prose entry-body">
+    {{ content }}
+  </div>
+
+  {%- if page.authors %}
+  <section class="entry-cite" aria-labelledby="cite-label">
+    <h2 class="entry-label" id="cite-label">How to cite</h2>
+    <p>{% for author in page.authors %}{% if forloop.last and forloop.length > 1 %}&amp; {% endif %}{{ author.cite | default: author.name }}{% unless forloop.last %}, {% endunless %}{% endfor %} ({{ page.date | date: "%Y" }}). <cite>{{ page.title }}</cite> [{{ page.kind | default: 'Study' }}]. {{ site.title }}. {{ page.url | absolute_url }}</p>
+  </section>
+  {%- endif %}
+</article>

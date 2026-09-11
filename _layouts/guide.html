@@ -1,0 +1,72 @@
+---
+layout: default
+---
+{%- comment -%}
+  Guide entry. One Markdown file per guide, in _guides/.
+  The front matter carries the label, the app and app version it applies
+  to, what it covers, an optional template download, the result and the
+  troubleshooting list; the body carries the steps or the workflow.
+  Guides set their text in Open Sans, like the rest of the site.
+{%- endcomment -%}
+{%- comment -%} Jekyll's where filter returns every app when the id is blank, so check it first. {%- endcomment -%}
+{%- if page.app.id -%}
+  {%- assign app = site.apps | where: "slug", page.app.id | first -%}
+{%- endif -%}
+<article class="wrap entry entry--guide">
+  <header class="page-head entry-head">
+    <p class="entry-kicker"><a href="{{ '/guides/' | relative_url }}">Guides</a><span aria-hidden="true"> · </span>{{ page.label | default: 'Guide' }}</p>
+    <h1 class="page-title">{{ page.title }}</h1>
+    <p class="entry-meta">
+      {%- if page.updated %}
+      <span>Updated <time datetime="{{ page.updated | date: '%Y-%m-%d' }}">{{ page.updated | date: "%-d %B %Y" }}</time></span>
+      {%- endif %}
+      {%- if page.app.id %}
+      <span>For {% if app %}<a href="{{ app.url | relative_url }}">{{ app.title }}</a>{% else %}{{ page.app.id }}{% endif %}{% if page.app.version %}, version {{ page.app.version }}{% endif %}</span>
+      {%- endif %}
+    </p>
+    {%- unless page.updated %}
+    <p class="entry-warning">This guide has no last-updated date. Add one before publishing.</p>
+    {%- endunless %}
+    {%- if page.app and page.app.version == nil %}
+    <p class="entry-warning">This guide covers an app but does not say which version. Add the version before publishing.</p>
+    {%- endif %}
+    {%- if page.description %}
+    <div class="page-lede entry-lede">{{ page.description | markdownify }}</div>
+    {%- endif %}
+  </header>
+
+  {% include sample-notice.html %}
+
+  {%- if page.template %}
+  <section class="entry-download" aria-labelledby="template-label">
+    <h2 class="entry-label" id="template-label">Template</h2>
+    <p><a class="button" href="{{ page.template.file | relative_url }}" download>{{ page.template.name }}</a></p>
+    {%- if page.template.note %}
+    <p class="entry-download__note">{{ page.template.note }}</p>
+    {%- endif %}
+  </section>
+  {%- endif %}
+
+  <div class="prose entry-body guide-body">
+    {{ content }}
+  </div>
+
+  {%- if page.result %}
+  <section class="entry-section prose" aria-labelledby="result-heading">
+    <h2 id="result-heading">What you end up with</h2>
+    {{ page.result | markdownify }}
+  </section>
+  {%- endif %}
+
+  {%- if page.troubleshooting %}
+  <section class="entry-section prose" aria-labelledby="trouble-heading">
+    <h2 id="trouble-heading">If something goes wrong</h2>
+    <dl class="trouble">
+      {%- for item in page.troubleshooting %}
+      <dt>{{ item.problem }}</dt>
+      <dd>{{ item.fix | markdownify }}</dd>
+      {%- endfor %}
+    </dl>
+  </section>
+  {%- endif %}
+</article>

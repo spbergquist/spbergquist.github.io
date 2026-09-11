@@ -8,7 +8,7 @@ sitemap: false
 <div class="wrap">
   <header class="page-head">
     <h1 class="page-title">Style guide</h1>
-    <p class="page-lede">The review page for the stylesheet: every colour and face in use, the three type pairings, and the section markers. It is not in the menu and search engines are told to skip it.</p>
+    <p class="page-lede">The review page for the stylesheet: every colour and face in use, the three type pairings, the section markers, and sample pages for the entry templates. It is not in the menu and search engines are told to skip it.</p>
   </header>
 
   <section class="sg-block" aria-labelledby="sg-colour">
@@ -128,7 +128,7 @@ sitemap: false
   <section class="sg-block" aria-labelledby="sg-pairings">
     <p class="sg-label">In use</p>
     <h2 id="sg-pairings">The three pairings</h2>
-    <p class="sg-note">Heading over body in each combination, with this stylesheet's real sizes and spacing. <strong>Sans over sans is the default for general pages.</strong> Archivo over IBM Plex Serif is for studies and technical guides, and Spectral headings are held back for short, high-stakes pieces. Sample text; the figures are placeholders.</p>
+    <p class="sg-note">Heading over body in each combination, with this stylesheet's real sizes and spacing. <strong>Sans over sans is the default for general pages.</strong> Archivo over IBM Plex Serif is for studies and technical reports, and Spectral headings are held back for short, high-stakes pieces. Sample text; the figures are placeholders.</p>
 
     <div class="sg-pairings">
       <article class="sg-pairing prose">
@@ -157,7 +157,7 @@ sitemap: false
       </article>
 
       <article class="sg-pairing prose pairing-sans-serif">
-        <p class="sg-label">Sans over serif · Archivo over IBM Plex Serif · studies and technical guides</p>
+        <p class="sg-label">Sans over serif · Archivo over IBM Plex Serif · studies and technical reports</p>
         <h3 style="font-size: var(--h2)">Measuring canopy cover</h3>
         <p>A densiometer reads canopy <em>closure</em>, the share of sky hidden from one point, while a classified photograph reads canopy <em>cover</em>, the share of ground under crowns. Readings are reported as ±2&nbsp;SD, with cover ≥50% at 12 of 40 stations near 49°19′12″N.</p>
         <h4>Paired-plot procedure</h4>
@@ -186,6 +186,19 @@ sitemap: false
       <div class="sg-marker section-consulting"><div class="page-head"><h3>Consulting</h3></div></div>
       <div class="sg-marker section-none"><div class="page-head"><h3>About</h3></div></div>
     </div>
+  </section>
+
+  <section class="sg-block" aria-labelledby="sg-templates">
+    <p class="sg-label">Templates</p>
+    <h2 id="sg-templates">Entry pages</h2>
+    <p class="sg-note">Every study, guide and app page is built from one of three templates. These sample pages show each one with placeholder text. They are not in the menu or the section lists, and they come down before launch.</p>
+    <ul class="sg-templates">
+      <li><a href="{{ '/research/sample-validation-study/' | relative_url }}">Study, published</a><span>With results, agreement figures and a citation, set in IBM Plex Serif.</span></li>
+      <li><a href="{{ '/research/sample-study-in-progress/' | relative_url }}">Study, in progress</a><span>The pass threshold, stated before there are any results.</span></li>
+      <li><a href="{{ '/guides/sample-app-guide/' | relative_url }}">Guide, step by step</a><span>Numbered steps for an app, stamped with the app version they apply to.</span></li>
+      <li><a href="{{ '/guides/sample-template-guide/' | relative_url }}">Guide, template and workflow</a><span>For someone else's software: a download plus the workflow.</span></li>
+      <li><a href="{{ '/apps/sample-app/' | relative_url }}">App</a><span>Its validation studies and guides are listed automatically.</span></li>
+    </ul>
   </section>
 
   <section class="sg-block" aria-labelledby="sg-notation">

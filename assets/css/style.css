@@ -21,6 +21,8 @@
      9. Type pairings
     10. Utilities
     11. Style guide page
+    12. Entry pages: studies, guides and apps
+    13. Print
    ========================================================================== */
 
 
@@ -529,4 +531,282 @@ figcaption, .caption {
   font-family: var(--font-wordmark);
   font-size: clamp(3rem, 2rem + 5vw, 5.5rem);
   line-height: 1.1;
+}
+
+.sg-templates { max-width: var(--measure); margin: 1.25rem 0 0; padding: 0; list-style: none; }
+.sg-templates li { padding-block: 0.6rem; border-bottom: 1px solid var(--rule); }
+.sg-templates li:first-child { border-top: 1px solid var(--rule); }
+.sg-templates a { font-weight: 600; }
+.sg-templates span { display: block; color: var(--muted); font-size: var(--text-sm); }
+
+
+/* 12. Entry pages: studies, guides and apps -----------------------------------
+   Every study, guide and app page is built from one of the three templates
+   in _layouts/. The section colour appears only in the small label above
+   the title, the bar above that and thin rules, never behind text.
+   Every block on an entry page shares one width, 40rem, so their right
+   edges line up whatever the font size inside.                          */
+
+.entry-head .page-title { margin-bottom: 0.25em; }
+
+.entry-kicker {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-ui);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: var(--section);
+}
+.entry-kicker a { color: inherit; text-decoration: none; }
+.entry-kicker a:hover { text-decoration: underline; }
+
+.entry-byline {
+  margin: 0.5rem 0 0;
+  font-family: var(--font-ui);
+  font-size: var(--text-lg);
+  line-height: 1.4;
+}
+.entry-author { display: inline-block; }   /* keeps a name with its affiliation */
+.entry-affiliation { color: var(--muted); }
+
+.entry-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 1rem;
+  margin: 0.9rem 0 0;
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+.entry-meta a { color: var(--ink); }
+
+/* Status words such as In progress, Published or Beta. */
+.status {
+  display: inline-block;
+  padding: 0.1rem 0.6rem;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  color: var(--ink);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.entry-lede { margin-top: 1.25rem; }
+.entry-lede p:last-child { margin-bottom: 0; }
+
+.entry-warning {
+  margin: 1rem 0 0;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  color: var(--research);
+}
+
+/* Small capital labels over the summary, the pass threshold and the like. */
+.entry-label {
+  margin: 0 0 0.6rem;
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* The plain-language summary: the block a funder reads first. */
+.entry-summary {
+  max-width: 40rem;
+  margin: 0 0 2.25rem;
+  padding-left: 1.25rem;
+  border-left: 4px solid var(--section);
+}
+.entry-summary p {
+  font-size: clamp(1.125rem, 1.05rem + 0.35vw, 1.25rem);
+  line-height: 1.55;
+}
+.entry-summary p:last-child { margin-bottom: 0; }
+
+.entry-facts {
+  display: grid;
+  grid-template-columns: minmax(7.5rem, max-content) minmax(0, 1fr);
+  gap: 0.55rem 1.75rem;
+  max-width: 40rem;
+  margin: 0 0 2.25rem;
+  padding-block: 1rem;
+  border-block: 1px solid var(--rule);
+  font-family: var(--font-ui);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+.entry-facts dt { color: var(--muted); }
+.entry-facts dd { margin: 0; min-width: 0; }
+
+/* The pass threshold, stated before any results exist. */
+.entry-callout {
+  max-width: 40rem;
+  margin: 0 0 2.25rem;
+  padding: 1.1rem 1.25rem;
+  border-left: 4px solid var(--section);
+  background: var(--raised);
+}
+.entry-callout .entry-label { color: var(--ink); }
+.entry-callout p:last-child { margin-bottom: 0; }
+.entry-callout__note { font-family: var(--font-ui); font-size: var(--text-sm); }
+
+.entry-pending {
+  max-width: 40rem;
+  margin: 0 0 2.25rem;
+  font-family: var(--font-ui);
+  font-weight: 600;
+}
+
+.entry-body { max-width: 40rem; margin-bottom: 1rem; }
+
+/* Tables written in an entry's text: labels may wrap, and a table too wide
+   for a phone scrolls sideways inside itself rather than moving the page. */
+.entry-body table { display: block; max-width: 100%; overflow-x: auto; }
+.entry-body td:first-child { white-space: normal; }
+.entry-body td[style*="right"] { white-space: nowrap; }   /* number columns */
+.entry-section { max-width: 40rem; margin-top: 2.5rem; }
+.entry-section > h2:first-child { margin-top: 0; }
+
+.entry-links { margin: 0; padding: 0; list-style: none; }
+.entry-links li { padding-block: 0.6rem; border-bottom: 1px solid var(--rule); }
+.entry-links li:first-child { border-top: 1px solid var(--rule); }
+.entry-links a { font-weight: 600; }
+.entry-links__meta {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+
+.entry-cite {
+  max-width: 40rem;
+  margin-top: 3rem;
+  padding: 1.1rem 1.25rem;
+  border: 1px solid var(--rule);
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  line-height: 1.55;
+}
+.entry-cite p { margin: 0; overflow-wrap: anywhere; }
+
+.entry-download { max-width: 40rem; margin: 0 0 2.25rem; }
+.entry-download p { margin: 0; }
+.entry-download .entry-download__note {
+  margin-top: 0.6rem;
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+
+/* Download and store buttons: outlined in the section colour, never filled. */
+.button {
+  display: inline-block;
+  padding: 0.55rem 1rem;
+  border: 2px solid var(--section);
+  border-radius: 0.25rem;
+  background: var(--base);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-weight: 600;
+  line-height: 1.3;
+  text-decoration: none;
+}
+.button:hover { background: var(--raised); }
+.store-links { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 0; }
+
+/* Numbered steps in guides, with the numbers in the heading face. */
+.guide-body > ol { padding-left: 0; list-style: none; counter-reset: step; }
+.guide-body > ol > li {
+  position: relative;
+  margin-top: 1.75rem;
+  padding-left: 2.75rem;
+  counter-increment: step;
+}
+.guide-body > ol > li:first-child { margin-top: 0; }
+.guide-body > ol > li::before {
+  content: counter(step);
+  position: absolute;
+  top: -0.2rem;
+  left: 0;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
+}
+.guide-body img {
+  display: block;
+  width: 100%;
+  max-width: 12.5rem;
+  margin: 0.75rem 0 0.5rem;
+  border: 1px solid var(--rule);
+}
+
+.trouble { margin: 0; }
+.trouble dt { margin-top: 1.25rem; font-weight: 600; }
+.trouble dt:first-child { margin-top: 0; }
+.trouble dd { margin: 0.3rem 0 0; }
+.trouble dd p:last-child { margin-bottom: 0; }
+
+.app-head { display: flex; align-items: flex-start; gap: 1.25rem; }
+.app-head__text { min-width: 0; }
+.app-icon { flex: none; width: 4.5rem; height: 4.5rem; border-radius: 1.1rem; }
+
+.data-use {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: 1rem 2.5rem;
+}
+.data-use h3 { margin: 0 0 0.5rem; font-size: var(--h4); }
+.data-use ul { margin: 0; padding-left: 1.2em; }
+.data-use li + li { margin-top: 0.35em; }
+
+/* The notice on template samples, which come down before launch. */
+.sample-notice {
+  max-width: 40rem;
+  margin: 0 0 2.25rem;
+  padding: 0.75rem 1rem;
+  border: 1px dashed var(--ink);
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+}
+
+@media (max-width: 36rem) {
+  .entry-facts { grid-template-columns: minmax(0, 1fr); gap: 0.1rem; }
+  .entry-facts dd + dt { margin-top: 0.7rem; }
+  .app-head { gap: 1rem; }
+  .app-icon { width: 3.5rem; height: 3.5rem; border-radius: 0.85rem; }
+}
+
+
+/* 13. Print -------------------------------------------------------------------
+   Studies and guides must print cleanly and stay citable: no menu, black
+   text on white, and web addresses written out after links.             */
+
+@media print {
+  :root { --base: #fff; --raised: #fff; --muted: #444; }
+  body { background: #fff; color: #000; font-size: 10.5pt; }
+  .skip-link, .site-nav, .store-links { display: none; }
+  .site-header { border-bottom: 1px solid #999; }
+  .site-main { padding-bottom: 0; }
+  .page-head { padding-block: 1rem 0.75rem; }
+  a { color: inherit; text-decoration: none; }
+  .entry-body a[href^="http"]::after,
+  .entry-callout a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    overflow-wrap: anywhere;
+  }
+  .page-head::before, .entry-summary, .entry-callout, .entry-kicker {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  h1, h2, h3, h4 { break-after: avoid; }
+  figure, img, table, .entry-callout, .entry-cite, .entry-facts, .trouble dd { break-inside: avoid; }
 }

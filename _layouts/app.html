@@ -1,0 +1,137 @@
+---
+layout: default
+---
+{%- comment -%}
+  App page. One Markdown file per app, in _apps/. The file name is the
+  app's id (sample-app.md is "sample-app"), which guides and studies use
+  to point at it. The Validation and Guides sections fill themselves in
+  from _studies/ and _guides/.
+{%- endcomment -%}
+{%- assign validation = "" | split: "" -%}
+{%- for study in site.studies -%}
+  {%- if study.kind == "Validation study" -%}
+    {%- for item in study.apps -%}
+      {%- if item.id == page.slug -%}{%- assign validation = validation | push: study -%}{%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign validation = validation | reverse -%}
+{%- assign guides = site.guides | where_exp: "guide", "guide.app.id == page.slug" -%}
+{%- assign body = content | strip -%}
+<article class="wrap entry entry--app">
+  <header class="page-head entry-head">
+    <div class="app-head">
+      {%- if page.icon %}
+      <img class="app-icon" src="{{ page.icon | relative_url }}" alt="" width="72" height="72">
+      {%- endif %}
+      <div class="app-head__text">
+        <p class="entry-kicker"><a href="{{ '/apps/' | relative_url }}">Apps</a></p>
+        <h1 class="page-title">{{ page.title }}</h1>
+        <p class="entry-meta">
+          {%- if page.status %}
+          <span class="status">{{ page.status }}</span>
+          {%- endif %}
+          {%- if page.version %}
+          <span>Version {{ page.version }}</span>
+          {%- endif %}
+        </p>
+      </div>
+    </div>
+  </header>
+
+  {% include sample-notice.html %}
+
+  {%- if page.description %}
+  <section class="entry-summary" aria-labelledby="measures-label">
+    <h2 class="entry-label" id="measures-label">What it measures</h2>
+    {{ page.description | markdownify }}
+  </section>
+  {%- endif %}
+
+  <dl class="entry-facts">
+    {%- if page.method %}
+    <dt>Built to reproduce</dt>
+    <dd>{{ page.method }}</dd>
+    {%- endif %}
+    <dt>Platform</dt>
+    <dd>{% if page.platforms %}{{ page.platforms | array_to_sentence_string }}{% else %}Not yet decided{% endif %}</dd>
+    <dt>Price</dt>
+    <dd>{{ page.price | default: 'Not yet set' }}</dd>
+  </dl>
+
+  <section class="entry-section" aria-labelledby="get-heading">
+    <h2 id="get-heading">Get it</h2>
+    {%- if page.store.google_play or page.store.app_store %}
+    <p class="store-links">
+      {%- if page.store.google_play %}
+      <a class="button" href="{{ page.store.google_play }}">Get it on Google Play</a>
+      {%- endif %}
+      {%- if page.store.app_store %}
+      <a class="button" href="{{ page.store.app_store }}">Download on the App Store</a>
+      {%- endif %}
+    </p>
+    {%- else %}
+    <p>Not in the app stores yet.</p>
+    {%- endif %}
+  </section>
+
+  <section class="entry-section" aria-labelledby="validation-heading">
+    <h2 id="validation-heading">Validation</h2>
+    {%- if validation.size > 0 %}
+    <ul class="entry-links">
+      {%- for study in validation %}
+      <li><a href="{{ study.url | relative_url }}">{{ study.title }}</a> <span class="entry-links__meta">{% if study.status %}{{ study.status }}, {% endif %}{{ study.date | date: "%-d %B %Y" }}</span></li>
+      {%- endfor %}
+    </ul>
+    {%- else %}
+    <p>No validation study yet.</p>
+    {%- endif %}
+  </section>
+
+  <section class="entry-section" aria-labelledby="guides-heading">
+    <h2 id="guides-heading">Guides for {{ page.title }}</h2>
+    {%- if guides.size > 0 %}
+    <ul class="entry-links">
+      {%- for guide in guides %}
+      <li><a href="{{ guide.url | relative_url }}">{{ guide.title }}</a> <span class="entry-links__meta">{{ guide.label | default: 'Guide' }}{% if guide.updated %}, updated {{ guide.updated | date: "%-d %B %Y" }}{% endif %}</span></li>
+      {%- endfor %}
+    </ul>
+    {%- else %}
+    <p>No guides yet.</p>
+    {%- endif %}
+  </section>
+
+  {%- if page.data_use %}
+  <section class="entry-section" aria-labelledby="use-heading">
+    <h2 id="use-heading">What the data is good for</h2>
+    <div class="data-use">
+      {%- if page.data_use.can %}
+      <div>
+        <h3>Suitable for</h3>
+        <ul>
+          {%- for item in page.data_use.can %}
+          <li>{{ item }}</li>
+          {%- endfor %}
+        </ul>
+      </div>
+      {%- endif %}
+      {%- if page.data_use.cannot %}
+      <div>
+        <h3>Not suitable for</h3>
+        <ul>
+          {%- for item in page.data_use.cannot %}
+          <li>{{ item }}</li>
+          {%- endfor %}
+        </ul>
+      </div>
+      {%- endif %}
+    </div>
+  </section>
+  {%- endif %}
+
+  {%- if body != "" %}
+  <div class="prose entry-body entry-section">
+    {{ body }}
+  </div>
+  {%- endif %}
+</article>
