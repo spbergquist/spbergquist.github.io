@@ -1,0 +1,32 @@
+# The main menu, in order.
+# To rename, reorder or add an item, edit this file only; every page
+# picks up the change.
+#
+#   title    what the menu shows
+#   url      the page it links to
+#   section  which section colour it carries (apps, research, guides,
+#            training, consulting), or none
+
+- title: Apps
+  url: /apps/
+  section: apps
+
+- title: Research
+  url: /research/
+  section: research
+
+- title: Guides        # working name; the section name is still open
+  url: /guides/
+  section: guides
+
+- title: Training
+  url: /training/
+  section: training
+
+- title: Consulting
+  url: /consulting/
+  section: consulting
+
+- title: About
+  url: /about/
+  section: none

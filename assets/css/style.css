@@ -1,0 +1,532 @@
+/* ==========================================================================
+   fun.limited : style.css
+
+   Direction D. A warm neutral base, with the five section colours used
+   only as territory markers: section headers, index cards and the home
+   entry blocks. Section colours never sit behind body text.
+
+   Type follows the fun.limited type system of 10 September 2026,
+   website and apps context: Archivo headings over Open Sans text by
+   default, with Spectral and IBM Plex Serif available as pairings.
+
+   Contents
+     1. Fonts
+     2. Design tokens
+     3. Base elements
+     4. Layout
+     5. Header, wordmark and navigation
+     6. Footer
+     7. Page head and section markers
+     8. Running text
+     9. Type pairings
+    10. Utilities
+    11. Style guide page
+   ========================================================================== */
+
+
+/* 1. Fonts ------------------------------------------------------------------
+   Self-hosted, so every character in the practice's notation is served
+   (± µ ≥ ≤ ′ ″ ² ³ × ° – —). Licences sit beside each font's files.       */
+
+@font-face {
+  font-family: "Archivo";
+  src: url("../fonts/archivo/Archivo-Medium.woff2") format("woff2");
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Archivo";
+  src: url("../fonts/archivo/Archivo-Bold.woff2") format("woff2");
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Archivo";
+  src: url("../fonts/archivo/Archivo-BoldItalic.woff2") format("woff2");
+  font-weight: 700; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: "Open Sans";
+  src: url("../fonts/open-sans/OpenSans-Regular.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Open Sans";
+  src: url("../fonts/open-sans/OpenSans-Italic.woff2") format("woff2");
+  font-weight: 400; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: "Open Sans";
+  src: url("../fonts/open-sans/OpenSans-SemiBold.woff2") format("woff2");
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Open Sans";
+  src: url("../fonts/open-sans/OpenSans-SemiBoldItalic.woff2") format("woff2");
+  font-weight: 600; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: "Spectral";
+  src: url("../fonts/spectral/Spectral-SemiBold.woff2") format("woff2");
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Spectral";
+  src: url("../fonts/spectral/Spectral-SemiBoldItalic.woff2") format("woff2");
+  font-weight: 600; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: "IBM Plex Serif";
+  src: url("../fonts/ibm-plex-serif/IBMPlexSerif-Regular.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "IBM Plex Serif";
+  src: url("../fonts/ibm-plex-serif/IBMPlexSerif-Italic.woff2") format("woff2");
+  font-weight: 400; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: "IBM Plex Serif";
+  src: url("../fonts/ibm-plex-serif/IBMPlexSerif-SemiBold.woff2") format("woff2");
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "IBM Plex Serif";
+  src: url("../fonts/ibm-plex-serif/IBMPlexSerif-SemiBoldItalic.woff2") format("woff2");
+  font-weight: 600; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: "Permanent Marker";
+  src: url("../fonts/permanent-marker/PermanentMarker-Regular.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+
+
+/* 2. Design tokens ---------------------------------------------------------
+   Change a colour or a face here and it changes everywhere.              */
+
+:root {
+  color-scheme: light;
+
+  /* Direction D, structure. Contrast ratios are against the page base. */
+  --base:    #F2F1EE;   /* page background */
+  --raised:  #E8E6E1;   /* panels and cards */
+  --ink:     #1A1A18;   /* text, 15.4:1 */
+  --muted:   #6B6A66;   /* secondary text, 4.8:1 on the base and 4.3:1
+                           on raised; kept as is, cards included */
+  --rule:    #DBD8D1;   /* hairlines */
+
+  /* Direction D, sections */
+  --apps:       #0B63C5;  /* cobalt, 5.2:1 */
+  --research:   #C2262A;  /* vermilion, 5.2:1 */
+  --guides:     #B8860B;  /* ochre, 2.9:1; used for text, cards
+                             included, and for bars */
+  --training:   #1F7A4D;  /* viridian, 4.7:1 */
+  --consulting: #5B3A9E;  /* violet, 7.3:1 */
+
+  /* The current page's territory colour. Ink unless a section sets it. */
+  --section: var(--ink);
+
+  /* Type, website and apps context */
+  --font-heading:       "Archivo", "Segoe UI", system-ui, sans-serif;
+  --font-text:          "Open Sans", "Segoe UI", system-ui, sans-serif;
+  --font-ui:            "Open Sans", "Segoe UI", system-ui, sans-serif;
+  --font-serif-heading: "Spectral", Georgia, "Times New Roman", serif;
+  --font-serif-text:    "IBM Plex Serif", Georgia, "Times New Roman", serif;
+  --font-wordmark:      "Permanent Marker", "Archivo", sans-serif;
+
+  --heading-weight:   700;
+  --heading-tracking: -0.018em;
+
+  /* Sizes. Headings scale with the window between phone and desktop. */
+  --text-sm:   0.875rem;
+  --text-base: 1.0625rem;
+  --text-lg:   1.25rem;
+  --h1: clamp(2.1rem, 1.45rem + 2.8vw, 3.25rem);
+  --h2: clamp(1.55rem, 1.25rem + 1.3vw, 2.1rem);
+  --h3: 1.3rem;
+  --h4: 1.0625rem;
+
+  --measure: 68ch;                    /* longest comfortable text line */
+  --wrap:    72rem;                   /* widest the page content goes */
+  --gutter:  clamp(1rem, 4vw, 2.5rem);
+}
+
+.section-apps       { --section: var(--apps); }
+.section-research   { --section: var(--research); }
+.section-guides     { --section: var(--guides); }
+.section-training   { --section: var(--training); }
+.section-consulting { --section: var(--consulting); }
+
+
+/* 3. Base elements ---------------------------------------------------------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--base);
+  color: var(--ink);
+  font-family: var(--font-text);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  font-kerning: normal;
+  font-synthesis: none;   /* never fake a bold or italic the font lacks */
+
+  /* keeps the footer at the bottom of the window on short pages */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+img, svg, video { max-width: 100%; height: auto; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  font-weight: var(--heading-weight);
+  letter-spacing: var(--heading-tracking);
+  line-height: 1.15;
+  margin: 0 0 0.5em;
+  text-wrap: balance;
+}
+h1 { font-size: var(--h1); line-height: 1.08; }
+h2 { font-size: var(--h2); }
+h3 { font-size: var(--h3); letter-spacing: -0.01em; }
+h4 { font-size: var(--h4); letter-spacing: 0; }
+
+p, ul, ol, dl, blockquote, table, figure { margin: 0 0 1em; }
+p { text-wrap: pretty; }
+
+a {
+  color: inherit;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+a:hover { text-decoration-thickness: 2px; }
+
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+strong, b { font-weight: 600; }
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: 2.5rem 0;
+}
+
+
+/* 4. Layout ----------------------------------------------------------------- */
+
+.wrap {
+  width: 100%;
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.site-main {
+  display: block;
+  flex: 1 0 auto;
+  padding-bottom: 4rem;
+}
+.site-main:focus { outline: none; }
+
+.skip-link {
+  position: absolute;
+  left: var(--gutter);
+  top: -4rem;
+  z-index: 10;
+  padding: 0.5rem 0.9rem;
+  background: var(--ink);
+  color: var(--base);
+  font-family: var(--font-ui);
+  font-weight: 600;
+  text-decoration: none;
+}
+.skip-link:focus { top: 0.75rem; }
+
+
+/* 5. Header, wordmark and navigation --------------------------------------- */
+
+.site-header { border-bottom: 1px solid var(--rule); }
+
+.site-header__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.25rem 2rem;
+  padding-block: 0.9rem;
+}
+
+/* Permanent Marker, still to be reviewed (type system, open item). */
+.wordmark {
+  font-family: var(--font-wordmark);
+  font-size: 1.75rem;
+  line-height: 1;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+  padding-block: 0.35rem;
+}
+
+.site-nav__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Each item carries its own section colour, shown only on hover and on
+   the page you are in, so the five never appear together at full
+   strength outside the home page. */
+.site-nav__link {
+  --accent: var(--ink);
+  display: inline-block;
+  padding-block: 0.55rem 0.4rem;
+  border-bottom: 3px solid transparent;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 0.975rem;
+  line-height: 1.3;
+  color: var(--ink);
+  text-decoration: none;
+}
+.site-nav__link[data-section="apps"]       { --accent: var(--apps); }
+.site-nav__link[data-section="research"]   { --accent: var(--research); }
+.site-nav__link[data-section="guides"]     { --accent: var(--guides); }
+.site-nav__link[data-section="training"]   { --accent: var(--training); }
+.site-nav__link[data-section="consulting"] { --accent: var(--consulting); }
+
+.site-nav__link:hover,
+.site-nav__link[aria-current] { border-bottom-color: var(--accent); }
+
+/* Windows high-contrast mode repaints transparent borders, which would
+   underline every item; keep the underline for the current page only. */
+@media (forced-colors: active) {
+  .site-nav__link { border-bottom-color: Canvas; }
+  .site-nav__link:hover,
+  .site-nav__link[aria-current] { border-bottom-color: LinkText; }
+}
+
+@media (max-width: 36rem) {
+  .site-header__inner { padding-block: 0.75rem 0.25rem; }
+  .site-nav { width: 100%; }
+  .site-nav__list { gap: 0 1.1rem; }
+}
+
+
+/* 6. Footer ----------------------------------------------------------------- */
+
+.site-footer {
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+}
+.site-footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 2rem;
+  padding-block: 1.75rem 2.5rem;
+}
+.site-footer p { margin: 0; }
+.site-footer a { color: var(--ink); }
+.site-footer__legal span { white-space: nowrap; }
+
+
+/* 7. Page head and section markers ------------------------------------------
+   The bar above each page title is the territory marker: it takes the
+   section's colour, or ink on pages outside the five sections.          */
+
+.page-head {
+  max-width: 52rem;
+  padding-block: clamp(2.25rem, 7vw, 4.5rem) clamp(1.5rem, 4vw, 2.5rem);
+}
+.page-head::before {
+  content: "";
+  display: block;
+  width: 3.5rem;
+  height: 0.375rem;
+  margin-bottom: 1.5rem;
+  background: var(--section);
+}
+.page-title { margin-bottom: 0.35em; }
+.page-lede {
+  max-width: 40rem;
+  margin: 0;
+  font-size: clamp(1.125rem, 1rem + 0.6vw, var(--text-lg));
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+
+/* 8. Running text ----------------------------------------------------------- */
+
+.prose { max-width: var(--measure); }
+.prose h2 { margin-top: 2em; }
+.prose h3 { margin-top: 1.6em; }
+.prose h2:first-child,
+.prose h3:first-child { margin-top: 0; }
+.prose ul, .prose ol { padding-left: 1.25em; }
+.prose li + li { margin-top: 0.35em; }
+
+.prose blockquote {
+  margin-inline: 0;
+  padding-left: 1.25rem;
+  border-left: 3px solid var(--rule);
+}
+
+.table-scroll { overflow-x: auto; margin: 0 0 1.5em; }
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95em;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+.prose th,
+.prose td {
+  padding: 0.5rem 1rem 0.5rem 0;
+  border-bottom: 1px solid var(--rule);
+  text-align: left;
+  vertical-align: top;
+}
+.prose th {
+  border-bottom-color: var(--ink);
+  font-family: var(--font-ui);
+  font-weight: 600;
+}
+.prose .num { text-align: right; }
+.prose td:first-child,
+.prose .num { white-space: nowrap; }
+
+figcaption, .caption {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+
+
+/* 9. Type pairings -----------------------------------------------------------
+   Sans over sans (Archivo over Open Sans) is the default and needs no
+   class. Add one of these to a page or block to switch pairing.
+   Interface text (menus, table headers, captions) stays Open Sans.      */
+
+/* Sans over serif: Archivo headings over IBM Plex Serif running text. */
+.pairing-sans-serif {
+  --font-text: var(--font-serif-text);
+  font-family: var(--font-text);
+}
+
+/* Serif over sans: Spectral headings over Open Sans running text. */
+.pairing-serif-sans {
+  --font-heading: var(--font-serif-heading);
+  --heading-weight: 600;
+  --heading-tracking: -0.01em;
+}
+
+
+/* 10. Utilities ------------------------------------------------------------- */
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Archivo's figures are proportional by default; this lines them up. */
+.tnum { font-variant-numeric: tabular-nums; }
+
+
+/* 11. Style guide page -------------------------------------------------------
+   Used only by /styleguide/, the review page for this stylesheet.       */
+
+.sg-block { padding-block: 2.5rem 0.5rem; border-top: 1px solid var(--rule); }
+.sg-block:first-of-type { border-top: 0; }
+
+.sg-label {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.sg-note { max-width: var(--measure); color: var(--muted); }
+.sg-note strong { color: var(--ink); }
+
+.sg-swatches {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr));
+  gap: 1rem;
+  margin: 1.25rem 0 2rem;
+}
+.sg-swatch { margin: 0; font-family: var(--font-ui); font-size: var(--text-sm); line-height: 1.45; }
+.sg-swatch__chip {
+  height: 4.5rem;
+  margin-bottom: 0.6rem;
+  border: 1px solid rgba(26, 26, 24, 0.12);
+}
+.sg-swatch__name { display: block; font-weight: 600; }
+.sg-swatch__value { display: block; color: var(--muted); font-variant-numeric: tabular-nums; }
+.sg-swatch__fail { display: block; color: var(--research); font-weight: 600; }
+
+.sg-face { padding-block: 1.5rem; border-bottom: 1px solid var(--rule); }
+.sg-face:last-child { border-bottom: 0; }
+.sg-face__name { margin: 0 0 0.4rem; font-size: clamp(2rem, 1.4rem + 2.6vw, 3rem); line-height: 1.1; }
+.sg-face__glyphs { margin: 0.25rem 0; font-size: clamp(1.5rem, 1.2rem + 1.3vw, 2.1rem); letter-spacing: 0.06em; line-height: 1.35; }
+.sg-face__sample { margin: 0.35rem 0 0; font-size: 1.125rem; }
+.sg-face__role { margin: 0.75rem 0 0; font-family: var(--font-ui); font-size: var(--text-sm); color: var(--muted); }
+
+.sg-pairings {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);  /* lets wide tables scroll inside */
+  gap: 1.5rem;
+  margin-top: 1.25rem;
+}
+.sg-pairing { padding: 1.5rem clamp(1rem, 3vw, 2rem) 1rem; border: 1px solid var(--rule); }
+.sg-pairing > .sg-label { margin-bottom: 1.25rem; }
+.sg-pairing > .sg-label + h3 { margin-top: 0; }
+
+.sg-markers {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+  gap: 1rem 2rem;
+  margin-top: 1.25rem;
+}
+.sg-marker .page-head { padding-block: 0.5rem; }
+.sg-marker .page-head::before { margin-bottom: 0.9rem; }
+.sg-marker h3 { margin: 0; }
+
+.sg-notation { max-width: var(--measure); padding-left: 1.25em; }
+.sg-notation li + li { margin-top: 0.5em; }
+.sg-notation code {
+  font-family: var(--font-ui);
+  font-size: 0.9em;
+  padding: 0.05em 0.35em;
+  background: var(--raised);
+}
+
+.sg-wordmark {
+  margin: 0.5rem 0 0.75rem;
+  font-family: var(--font-wordmark);
+  font-size: clamp(3rem, 2rem + 5vw, 5.5rem);
+  line-height: 1.1;
+}

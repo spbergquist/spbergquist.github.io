@@ -1,0 +1,54 @@
+# ------------------------------------------------------------------
+# fun.limited : site settings
+#
+# GitHub reads this file every time it rebuilds the site.
+# Lines starting with # are notes to you and are ignored.
+# ------------------------------------------------------------------
+
+title: fun.limited
+lang: en-CA
+timezone: America/Vancouver
+
+# Contact address shown in the footer.
+email: ReleveApps@Fun.Limited
+
+# The one-sentence description of the practice is still an open
+# decision (build spec, section 9). Leave the quotes empty until it is
+# settled, then put the sentence between them. Empty quotes also stop
+# GitHub borrowing the repository's own description for search results.
+description: ""
+
+# While this says true, every page asks search engines not to list it.
+# Change it to false on launch day, when fun.limited points here.
+preview: true
+
+# Turns off GitHub's built-in "Primer" theme. Without this line GitHub
+# quietly adds its own stylesheet at the same address as ours.
+theme: null
+
+# The site's web address is left out on purpose while the site is in
+# preview: GitHub fills in the github.io address itself. At launch, add
+#   url: "https://fun.limited"
+# (spelled exactly as the domain you connect) when you set preview to false.
+
+markdown: kramdown
+kramdown:
+  input: GFM
+
+plugins:
+  - jekyll-seo-tag    # page titles and link previews (LinkedIn, email)
+  - jekyll-sitemap    # a list of pages for search engines
+
+exclude:
+  - README.md
+  - CNAME
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default

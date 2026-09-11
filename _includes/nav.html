@@ -1,0 +1,13 @@
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="wordmark" href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>fun.limited</a>
+    <nav class="site-nav" aria-label="Main">
+      <ul class="site-nav__list">
+        {%- for item in site.data.navigation %}
+        <li><a class="site-nav__link" href="{{ item.url | relative_url }}" data-section="{{ item.section }}"
+          {%- if page.url == item.url %} aria-current="page"{% elsif page.section and page.section == item.section and item.section != 'none' %} aria-current="true"{% endif %}>{{ item.title }}</a></li>
+        {%- endfor %}
+      </ul>
+    </nav>
+  </div>
+</header>

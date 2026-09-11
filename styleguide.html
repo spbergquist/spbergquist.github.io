@@ -1,0 +1,207 @@
+---
+updated: 2026-09-10
+title: Style guide
+permalink: /styleguide/
+noindex: true
+sitemap: false
+---
+<div class="wrap">
+  <header class="page-head">
+    <h1 class="page-title">Style guide</h1>
+    <p class="page-lede">The review page for the stylesheet: every colour and face in use, the three type pairings, and the section markers. It is not in the menu and search engines are told to skip it.</p>
+  </header>
+
+  <section class="sg-block" aria-labelledby="sg-colour">
+    <p class="sg-label">Direction D</p>
+    <h2 id="sg-colour">Colour</h2>
+    <p class="sg-note">Contrast is measured against the page base and against a panel (the raised surface). Small text needs <strong>4.5 to 1</strong> to meet the usual accessibility standard. Anything short of that is marked in red. The palette is final as of 10 September 2026, so the ochre, muted grey and viridian stay as they are even where marked.</p>
+
+    <h3>Structure</h3>
+    <div class="sg-swatches">
+      <figure class="sg-swatch">
+        <div class="sg-swatch__chip" style="background: var(--base)"></div>
+        <span class="sg-swatch__name">Page base</span>
+        <span class="sg-swatch__value">#F2F1EE</span>
+      </figure>
+      <figure class="sg-swatch">
+        <div class="sg-swatch__chip" style="background: var(--raised)"></div>
+        <span class="sg-swatch__name">Raised (panels)</span>
+        <span class="sg-swatch__value">#E8E6E1</span>
+      </figure>
+      <figure class="sg-swatch">
+        <div class="sg-swatch__chip" style="background: var(--ink)"></div>
+        <span class="sg-swatch__name">Ink</span>
+        <span class="sg-swatch__value">#1A1A18</span>
+        <span class="sg-swatch__value">15.4 page · 14.0 panel</span>
+      </figure>
+      <figure class="sg-swatch">
+        <div class="sg-swatch__chip" style="background: var(--muted)"></div>
+        <span class="sg-swatch__name">Muted</span>
+        <span class="sg-swatch__value">#6B6A66</span>
+        <span class="sg-swatch__value">4.8 page</span>
+        <span class="sg-swatch__fail">4.3 on a panel</span>
+      </figure>
+      <figure class="sg-swatch">
+        <div class="sg-swatch__chip" style="background: var(--rule)"></div>
+        <span class="sg-swatch__name">Hairline</span>
+        <span class="sg-swatch__value">#DBD8D1</span>
+        <span class="sg-swatch__value">Lines only</span>
+      </figure>
+    </div>
+
+    <h3>Sections</h3>
+    <div class="sg-swatches">
+      <figure class="sg-swatch">
+        <div class="sg-swatch__chip" style="background: var(--apps)"></div>
+        <span class="sg-swatch__name">Apps, cobalt</span>
+        <span class="sg-swatch__value">#0B63C5</span>
+        <span class="sg-swatch__value">5.2 page · 4.7 panel</span>
+      </figure>
+      <figure class="sg-swatch">
+        <div class="sg-swatch__chip" style="background: var(--research)"></div>
+        <span class="sg-swatch__name">Research, vermilion</span>
+        <span class="sg-swatch__value">#C2262A</span>
+        <span class="sg-swatch__value">5.2 page · 4.7 panel</span>
+      </figure>
+      <figure class="sg-swatch">
+        <div class="sg-swatch__chip" style="background: var(--guides)"></div>
+        <span class="sg-swatch__name">Guides, ochre</span>
+        <span class="sg-swatch__value">#B8860B</span>
+        <span class="sg-swatch__value">Text and bars</span>
+        <span class="sg-swatch__fail">2.9 page · 2.6 panel</span>
+      </figure>
+      <figure class="sg-swatch">
+        <div class="sg-swatch__chip" style="background: var(--training)"></div>
+        <span class="sg-swatch__name">Training, viridian</span>
+        <span class="sg-swatch__value">#1F7A4D</span>
+        <span class="sg-swatch__value">4.7 page</span>
+        <span class="sg-swatch__fail">4.3 on a panel</span>
+      </figure>
+      <figure class="sg-swatch">
+        <div class="sg-swatch__chip" style="background: var(--consulting)"></div>
+        <span class="sg-swatch__name">Consulting, violet</span>
+        <span class="sg-swatch__value">#5B3A9E</span>
+        <span class="sg-swatch__value">7.3 page · 6.6 panel</span>
+      </figure>
+    </div>
+  </section>
+
+  <section class="sg-block" aria-labelledby="sg-faces">
+    <p class="sg-label">Type system, website and apps</p>
+    <h2 id="sg-faces">Faces</h2>
+    <p class="sg-note">Each face set in itself and served from this site, so every character below is the real face rather than a stand-in. The notation and species lines are sample text.</p>
+
+    <div class="sg-face" style="font-family: var(--font-heading); font-weight: 700">
+      <p class="sg-face__name">Archivo</p>
+      <p class="sg-face__glyphs">± µ ≥ ≤ ′ ″ ² ³ × ° – —</p>
+      <p class="sg-face__sample">±2&nbsp;SD · ≥50% cover · 12&nbsp;µg/L · 40&nbsp;m² · 49°19′12″N</p>
+      <p class="sg-face__sample">Dominant canopy: <em>Tsuga heterophylla</em> and <em>Thuja plicata</em>.</p>
+      <p class="sg-face__sample" style="font-weight: 500">Apps · Research · Guides · Training · Consulting · About</p>
+      <p class="sg-face__role">Page titles and headings in Bold and Bold Italic; the menu in Medium (the last line above).</p>
+    </div>
+
+    <div class="sg-face" style="font-family: var(--font-ui)">
+      <p class="sg-face__name">Open Sans</p>
+      <p class="sg-face__glyphs">± µ ≥ ≤ ′ ″ ² ³ × ° – —</p>
+      <p class="sg-face__sample">±2&nbsp;SD · ≥50% cover · 12&nbsp;µg/L · 40&nbsp;m² · 49°19′12″N</p>
+      <p class="sg-face__sample">Dominant canopy: <em>Tsuga heterophylla</em> and <em>Thuja plicata</em>. <strong>SemiBold for emphasis.</strong></p>
+      <p class="sg-face__role">Running text by default, plus interface text everywhere: menus, labels, captions and table headers.</p>
+    </div>
+
+    <div class="sg-face" style="font-family: var(--font-serif-heading); font-weight: 600">
+      <p class="sg-face__name">Spectral</p>
+      <p class="sg-face__glyphs">± µ ≥ ≤ ′ ″ ² ³ × ° – —</p>
+      <p class="sg-face__sample">±2&nbsp;SD · ≥50% cover · 12&nbsp;µg/L · 40&nbsp;m² · 49°19′12″N</p>
+      <p class="sg-face__sample">Dominant canopy: <em>Tsuga heterophylla</em> and <em>Thuja plicata</em>.</p>
+      <p class="sg-face__role">Serif headings, held back for short, high-stakes pieces, in SemiBold and SemiBold Italic.</p>
+    </div>
+
+    <div class="sg-face" style="font-family: var(--font-serif-text)">
+      <p class="sg-face__name">IBM Plex Serif</p>
+      <p class="sg-face__glyphs">± µ ≥ ≤ ′ ″ ² ³ × ° – —</p>
+      <p class="sg-face__sample">±2&nbsp;SD · ≥50% cover · 12&nbsp;µg/L · 40&nbsp;m² · 49°19′12″N</p>
+      <p class="sg-face__sample">Dominant canopy: <em>Tsuga heterophylla</em> and <em>Thuja plicata</em>. <strong>SemiBold for emphasis.</strong></p>
+      <p class="sg-face__role">Serif running text for long reading, in Regular, Italic and SemiBold. IBM's own files, unaltered.</p>
+    </div>
+  </section>
+
+  <section class="sg-block" aria-labelledby="sg-pairings">
+    <p class="sg-label">In use</p>
+    <h2 id="sg-pairings">The three pairings</h2>
+    <p class="sg-note">Heading over body in each combination, with this stylesheet's real sizes and spacing. <strong>Sans over sans is the default for general pages.</strong> Archivo over IBM Plex Serif is for studies and technical guides, and Spectral headings are held back for short, high-stakes pieces. Sample text; the figures are placeholders.</p>
+
+    <div class="sg-pairings">
+      <article class="sg-pairing prose">
+        <p class="sg-label">Sans over sans · Archivo over Open Sans · default</p>
+        <h3 style="font-size: var(--h2)">Measuring canopy cover</h3>
+        <p>A densiometer reads canopy <em>closure</em>, the share of sky hidden from one point, while a classified photograph reads canopy <em>cover</em>, the share of ground under crowns. <a href="{{ '/styleguide/' | relative_url }}">An ordinary link</a> looks like this, and <strong>emphasis</strong> like this.</p>
+        <h4>Paired-plot procedure</h4>
+        <ul>
+          <li>Re-occupy the plot centre to within 0.3&nbsp;m.</li>
+          <li>Read the densiometer at four cardinal facings.</li>
+          <li>Photograph the canopy at 1.3&nbsp;m, lens level.</li>
+        </ul>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr><th scope="col">Plot</th><th scope="col" class="num">Closure (%)</th><th scope="col" class="num">Cover (%)</th><th scope="col" class="num">Difference</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>L-01</td><td class="num">81.2</td><td class="num">76.4</td><td class="num">+4.8</td></tr>
+              <tr><td>L-02</td><td class="num">64.0</td><td class="num">59.7</td><td class="num">+4.3</td></tr>
+              <tr><td>L-11</td><td class="num">47.5</td><td class="num">41.1</td><td class="num">+6.4</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <blockquote><p>A quotation or a callout sits in from the margin with a hairline rule.</p></blockquote>
+      </article>
+
+      <article class="sg-pairing prose pairing-sans-serif">
+        <p class="sg-label">Sans over serif · Archivo over IBM Plex Serif · studies and technical guides</p>
+        <h3 style="font-size: var(--h2)">Measuring canopy cover</h3>
+        <p>A densiometer reads canopy <em>closure</em>, the share of sky hidden from one point, while a classified photograph reads canopy <em>cover</em>, the share of ground under crowns. Readings are reported as ±2&nbsp;SD, with cover ≥50% at 12 of 40 stations near 49°19′12″N.</p>
+        <h4>Paired-plot procedure</h4>
+        <p>Re-occupy the plot centre to within 0.3&nbsp;m, then read the densiometer at four cardinal facings. Dominant canopy: <em>Tsuga heterophylla</em>.</p>
+      </article>
+
+      <article class="sg-pairing prose pairing-serif-sans">
+        <p class="sg-label">Serif over sans · Spectral over Open Sans · short, high-stakes pieces</p>
+        <h3 style="font-size: var(--h2)">Measuring canopy cover</h3>
+        <p>A densiometer reads canopy <em>closure</em>, the share of sky hidden from one point, while a classified photograph reads canopy <em>cover</em>, the share of ground under crowns. Readings are reported as ±2&nbsp;SD, with cover ≥50% at 12 of 40 stations near 49°19′12″N.</p>
+        <h4>Paired-plot procedure</h4>
+        <p>Re-occupy the plot centre to within 0.3&nbsp;m, then read the densiometer at four cardinal facings. Dominant canopy: <em>Tsuga heterophylla</em>.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="sg-block" aria-labelledby="sg-markers">
+    <p class="sg-label">Territory</p>
+    <h2 id="sg-markers">Section markers</h2>
+    <p class="sg-note">The bar above each page title takes the section's colour. In the menu, the same colour appears as an underline on the page you are in and when you point at an item, so the five never show together at full strength outside the home page. Pages outside the five sections, such as About, take ink.</p>
+    <div class="sg-markers">
+      <div class="sg-marker section-apps"><div class="page-head"><h3>Apps</h3></div></div>
+      <div class="sg-marker section-research"><div class="page-head"><h3>Research</h3></div></div>
+      <div class="sg-marker section-guides"><div class="page-head"><h3>Guides</h3></div></div>
+      <div class="sg-marker section-training"><div class="page-head"><h3>Training</h3></div></div>
+      <div class="sg-marker section-consulting"><div class="page-head"><h3>Consulting</h3></div></div>
+      <div class="sg-marker section-none"><div class="page-head"><h3>About</h3></div></div>
+    </div>
+  </section>
+
+  <section class="sg-block" aria-labelledby="sg-notation">
+    <p class="sg-label">When writing pages</p>
+    <h2 id="sg-notation">Notation</h2>
+    <ul class="sg-notation">
+      <li><strong>Join a number to its unit with a non-breaking space</strong>, so a line never ends on the number: type <code>0.3&amp;nbsp;m</code> and it shows as 0.3&nbsp;m. Without it, a narrow phone screen can leave the unit stranded on the next line.</li>
+      <li><strong>Greek letters belong in running text, not headings.</strong> Open Sans and IBM Plex Serif carry the whole Greek alphabet, so α, β, σ and χ are safe in body text. Archivo and Spectral carry only Δ, μ and π, so a heading such as “β&nbsp;diversity” would show its β in a substitute face.</li>
+      <li><strong>Use the true minus sign − for negative values</strong> rather than a hyphen, so −4.8 lines up with +4.8 in a table.</li>
+    </ul>
+  </section>
+
+  <section class="sg-block" aria-labelledby="sg-wordmark">
+    <p class="sg-label">Not yet reviewed</p>
+    <h2 id="sg-wordmark">Wordmark</h2>
+    <p class="sg-wordmark" aria-hidden="true">fun.limited</p>
+    <p class="sg-note">Permanent Marker, carried over as the incumbent. It is the one part of the type system never reviewed. It lacks ≥ ≤ ′ ″, which does not matter for a wordmark.</p>
+  </section>
+</div>
