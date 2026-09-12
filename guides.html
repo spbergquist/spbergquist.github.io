@@ -1,12 +1,38 @@
 ---
-updated: 2026-09-10
+updated: 2026-09-11
 title: Guides
 permalink: /guides/
 section: guides
 ---
+{%- comment -%}
+  The Guides index. Build spec section 5.4: grouped by stage of the work
+  rather than by app, because that is the order someone arrives in. The
+  four stage headings show even when a stage is empty, so a visitor can
+  see what the section will cover.
+
+  "Guides" is still a working name; the spec leaves the section name open.
+{%- endcomment -%}
 <div class="wrap">
   <header class="page-head">
     <h1 class="page-title">Guides</h1>
-    <p class="page-lede">Placeholder. The Guides index, a sorted list of guides, is built in step 5. The section's name is still open.</p>
+    <p class="page-lede">How to do the work, not only how to work the app. Designing the sampling, running the field method, and the desk steps on either side of it.</p>
   </header>
+
+  {%- assign guides = site.guides | where_exp: "g", "g.sample != true" -%}
+
+  {% include guide-group.html guides=guides stage="plan"
+     title="Plan the sampling"
+     line="Transects, randomly placed plots, how many samples and where to put them, and what a layout has to look like to be defensible." %}
+
+  {% include guide-group.html guides=guides stage="collect"
+     title="Collect in the field"
+     line="The field method, the app steps, what to record, and how to return to the same plots later." %}
+
+  {% include guide-group.html guides=guides stage="export"
+     title="Get the data out"
+     line="Exports and file formats." %}
+
+  {% include guide-group.html guides=guides stage="elsewhere"
+     title="Use it elsewhere"
+     line="Google Earth, spreadsheets and data services. A template and a described workflow rather than click-by-click steps, because someone else's software gets redesigned." %}
 </div>

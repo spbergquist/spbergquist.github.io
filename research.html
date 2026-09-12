@@ -1,12 +1,43 @@
 ---
-updated: 2026-09-10
+updated: 2026-09-11
 title: Research
 permalink: /research/
 section: research
 ---
+{%- comment -%}
+  The Research index. Build spec section 5.3: every study with its title,
+  type label, date, which apps are involved and its status, newest first.
+  Samples are excluded here and on every other index.
+{%- endcomment -%}
 <div class="wrap">
   <header class="page-head">
     <h1 class="page-title">Research</h1>
-    <p class="page-lede">Placeholder. The Research index, a sorted list of studies, is built in step 5.</p>
+    <p class="page-lede">Studies testing whether an app agrees with the established method, and studies carried out using one. Work by other people belongs here too.</p>
   </header>
+
+  {%- assign studies = site.studies | where_exp: "s", "s.sample != true" -%}
+  {%- if studies.size > 0 -%}
+  {%- assign studies = studies | sort: "date" | reverse -%}
+  <ul class="index-list">
+    {%- for s in studies %}
+    <li class="index-item">
+      <h2 class="index-item__title"><a href="{{ s.url | relative_url }}">{{ s.title }}</a></h2>
+      <p class="index-meta">
+        {%- if s.kind %}<span class="index-meta__kind">{{ s.kind }}</span>{% endif %}
+        {%- if s.date %}<time datetime="{{ s.date | date: '%Y-%m-%d' }}">{{ s.date | date: "%-d %B %Y" }}</time>{% endif %}
+        {%- for a in s.apps %}{% if a.id %}{% assign appdoc = site.apps | where: "slug", a.id | first %}<span>{{ appdoc.title | default: a.id }}{% if a.version %} {{ a.version }}{% endif %}</span>{% endif %}{% endfor %}
+        {%- if s.status %}<span class="status">{{ s.status }}</span>{% endif %}
+      </p>
+      {%- if s.description %}
+      <p class="index-item__lede">{{ s.description | strip_newlines }}</p>
+      {%- endif %}
+    </li>
+    {%- endfor %}
+  </ul>
+  {%- else -%}
+  <div class="index-empty">
+    <p><strong>No studies published yet.</strong></p>
+    <p>A study in progress gets a page here before it has results, stating the method and the agreement figure that will count as a pass. A threshold published before the data exists is the one thing a reviewer cannot argue with afterwards.</p>
+  </div>
+  {%- endif %}
 </div>

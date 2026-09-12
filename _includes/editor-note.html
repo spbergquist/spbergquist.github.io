@@ -1,0 +1,11 @@
+{%- comment -%}
+  A note to Sean about what this page still needs. It appears only while
+  _config.yml says preview: true, so every one of these disappears by
+  itself on launch day. Parameter: text (may contain HTML).
+{%- endcomment -%}
+{%- if site.preview -%}
+<div class="editor-note">
+  <span class="editor-note__label">Still to write</span>
+  {{ include.text }}
+</div>
+{%- endif -%}

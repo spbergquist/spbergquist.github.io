@@ -1,12 +1,38 @@
 ---
-updated: 2026-09-10
+updated: 2026-09-11
 title: About
 permalink: /about/
-section: none
 ---
+{%- comment -%}
+  About. Build spec section 5.7: bio, publication list, contact. Short,
+  and checkable rather than persuasive, because this is the page a
+  skeptical reader opens before deciding whether to trust anything else.
+
+  No section colour: About sits outside the five lines, so the marker bar
+  above the title is ink.
+{%- endcomment -%}
 <div class="wrap">
   <header class="page-head">
     <h1 class="page-title">About</h1>
-    <p class="page-lede">Placeholder. The About page is built in step 5.</p>
+    <p class="page-lede">fun.limited is a one- to two-person environmental practice. Relevé is its product line.</p>
   </header>
+
+  {% include editor-note.html text="<p>Draft bio, assembled only from things you have stated. Check every line before launch, and cut anything you would not want quoted back at you. Two deliberate omissions: your current employer, and where you are based, since spec section 9 leaves the American or Canadian market question open and a location on this page answers it by accident.</p><p>The publication list is the other gap. It is the most load-bearing thing on the page for the reader this page exists for.</p>" %}
+
+  <div class="index-intro prose">
+    <p>Sean P. Bergquist is an ecologist with more than twenty years in environmental project management, across regulatory compliance, ecological restoration, and carbon and climate work. He has led programs with budgets up to $35 million and teams of up to 150 people, and has twenty-five years of permitting experience at municipal, state and federal levels.</p>
+    <p>He holds a Master of Environmental Management from Griffith University, an MBA from Warwick Business School, and a BA in Environmental Studies from UCLA. He has peer-reviewed publications in coastal and wetland science.</p>
+    <p>The apps on this site come out of that work. A field measurement is only worth taking if somebody downstream can rely on it, which means the method has to be defensible, the tool has to reproduce it faithfully, and both have to be written down where anyone can check them. That is what this site is for.</p>
+  </div>
+
+  <h2>Publications</h2>
+  <div class="index-empty">
+    <p><strong>Not listed yet.</strong></p>
+    <p>Peer-reviewed publications, each with its full citation and a link where one exists.</p>
+  </div>
+
+  <h2>Contact</h2>
+  <div class="index-intro">
+    <p><a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+  </div>
 </div>

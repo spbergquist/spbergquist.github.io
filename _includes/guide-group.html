@@ -1,0 +1,32 @@
+{%- comment -%}
+  One stage of work on the Guides index. The heading shows whether or not
+  there are guides in it yet, so a visitor can see what the section will
+  cover. Parameters: stage, title, line.
+{%- endcomment -%}
+{%- assign group = include.guides | where: "stage", include.stage -%}
+<section class="index-group">
+  <div class="index-group__head">
+    <h2 class="index-group__title">{{ include.title }}</h2>
+    <p class="index-group__line">{{ include.line }}</p>
+  </div>
+  {%- if group.size > 0 %}
+  <ul class="index-list">
+    {%- assign sorted = group | sort: "title" -%}
+    {%- for g in sorted %}
+    <li class="index-item">
+      <h3 class="index-item__title"><a href="{{ g.url | relative_url }}">{{ g.title }}</a></h3>
+      <p class="index-meta">
+        {%- if g.label %}<span class="index-meta__kind">{{ g.label }}</span>{% endif %}
+        {%- if g.app and g.app.id %}<span>{{ g.app.id }}{% if g.app.version %} {{ g.app.version }}{% endif %}</span>{% endif %}
+        {%- if g.updated %}<time datetime="{{ g.updated | date: '%Y-%m-%d' }}">Updated {{ g.updated | date: "%-d %B %Y" }}</time>{% endif %}
+      </p>
+      {%- if g.description %}
+      <p class="index-item__lede">{{ g.description | strip_newlines }}</p>
+      {%- endif %}
+    </li>
+    {%- endfor %}
+  </ul>
+  {%- else %}
+  <p class="index-none">Nothing here yet.</p>
+  {%- endif %}
+</section>

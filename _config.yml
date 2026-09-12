@@ -12,11 +12,12 @@ timezone: America/Vancouver
 # Contact address shown in the footer.
 email: ReleveApps@Fun.Limited
 
-# The one-sentence description of the practice is still an open
-# decision (build spec, section 9). Leave the quotes empty until it is
-# settled, then put the sentence between them. Empty quotes also stop
-# GitHub borrowing the repository's own description for search results.
-description: ""
+# The one-sentence description of the practice, settled 11 September 2026.
+# It is the sentence on the home page, and it is also what search results
+# and link previews show, which is why it is set here rather than only in
+# the page. Setting it also stops GitHub borrowing the repository's own
+# description.
+description: "Tools, methods and evidence for measuring the environment properly."
 
 # While this says true, every page asks search engines not to list it.
 # Change it to false on launch day, when fun.limited points here.

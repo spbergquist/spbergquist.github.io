@@ -1,10 +1,87 @@
 ---
-updated: 2026-09-10
+updated: 2026-09-11
 permalink: /
 ---
+{%- comment -%}
+  The home page. Build spec section 5.1.
+
+  The four entry blocks are the page's job: four doors, one line each, no
+  persuasion. The spec rules out a mission statement, a feature grid, a
+  pricing table and testimonials, so none of those belong here later either.
+
+  This is the only page where more than one section colour appears at full
+  strength. Training is deliberately not one of the four doors; it lives in
+  the menu until there is a course to sell.
+{%- endcomment -%}
 <div class="wrap">
-  <header class="page-head">
-    <h1 class="page-title">Site skeleton</h1>
-    <p class="page-lede">Placeholder. The home page is built in step 5. For now this page shows the header, menu and footer working, and the <a href="{{ '/styleguide/' | relative_url }}">style guide</a> shows the type and colours in use.</p>
+
+  <header class="home-head">
+    <h1 class="home-statement">Tools, methods and evidence for measuring the environment properly.</h1>
   </header>
+
+  <ul class="home-blocks">
+    <li class="home-block" data-section="guides">
+      <h2 class="home-block__title"><a href="{{ '/guides/' | relative_url }}">How to do it</a></h2>
+      <p class="home-block__line">Where to put the plots, how to run the method in the field, and how to get the data out afterwards.</p>
+    </li>
+    <li class="home-block" data-section="apps">
+      <h2 class="home-block__title"><a href="{{ '/apps/' | relative_url }}">Field apps</a></h2>
+      <p class="home-block__line">Small phone tools that each take one field measurement properly.</p>
+    </li>
+    <li class="home-block" data-section="research">
+      <h2 class="home-block__title"><a href="{{ '/research/' | relative_url }}">The evidence</a></h2>
+      <p class="home-block__line">Studies testing the apps against the established method, and work carried out using them.</p>
+    </li>
+    <li class="home-block" data-section="consulting">
+      <h2 class="home-block__title"><a href="{{ '/consulting/' | relative_url }}">Work with me</a></h2>
+      <p class="home-block__line">Program design, protocol development and custom tools, for organisations that need a measurement to hold up.</p>
+    </li>
+  </ul>
+
+  {%- comment -%}
+    The most recent published study. This block writes itself the moment a
+    real study exists, and stays out of the way until then, rather than
+    showing an empty frame. Studies still in progress are skipped, since
+    the spec asks for the most recently published item.
+  {%- endcomment -%}
+  {%- assign published = site.studies | where_exp: "s", "s.sample != true" -%}
+  {%- assign published = published | where_exp: "s", "s.status != 'In progress'" -%}
+  {%- if published.size > 0 -%}
+    {%- assign latest = published | sort: "date" | reverse | first -%}
+  <section class="home-panel section-research">
+    <p class="home-panel__label">Latest research</p>
+    <h2 class="index-item__title"><a href="{{ latest.url | relative_url }}">{{ latest.title }}</a></h2>
+    <p class="index-meta">
+      {%- if latest.kind %}<span class="index-meta__kind">{{ latest.kind }}</span>{% endif %}
+      {%- if latest.date %}<time datetime="{{ latest.date | date: '%Y-%m-%d' }}">{{ latest.date | date: "%-d %B %Y" }}</time>{% endif %}
+      {%- if latest.status %}<span class="status">{{ latest.status }}</span>{% endif %}
+    </p>
+    {%- if latest.description %}
+    <p class="index-item__lede">{{ latest.description | strip_newlines }}</p>
+    {%- endif %}
+  </section>
+  {%- endif %}
+
+  {% include signup.html
+     line="An email when a study is published or a new guide goes up. Nothing else, and never more than a few times a year."
+     subject="Add%20me%20to%20the%20fun.limited%20list"
+     note="A proper signup form replaces this once a mailing service is chosen." %}
+
+  {%- comment -%}
+    The review list. It shows only while _config.yml says preview: true, so
+    it takes itself down on launch day. Every upload that adds or changes
+    pages updates this list, so Sean has one place to click from.
+  {%- endcomment -%}
+  {%- if site.preview %}
+  <section class="review-list">
+    <h2>To review</h2>
+    <p>This list is only here while the site is in preview. It disappears on launch.</p>
+    <ul>
+      <li><a href="{{ '/styleguide/' | relative_url }}">Style guide</a> — type, colours and the section markers</li>
+      <li>Section pages: <a href="{{ '/apps/' | relative_url }}">Apps</a>, <a href="{{ '/research/' | relative_url }}">Research</a>, <a href="{{ '/guides/' | relative_url }}">Guides</a>, <a href="{{ '/training/' | relative_url }}">Training</a>, <a href="{{ '/consulting/' | relative_url }}">Consulting</a>, <a href="{{ '/about/' | relative_url }}">About</a></li>
+      <li>Entry templates: <a href="{{ '/research/sample-validation-study/' | relative_url }}">a finished study</a>, <a href="{{ '/research/sample-study-in-progress/' | relative_url }}">a study in progress</a>, <a href="{{ '/guides/sample-app-guide/' | relative_url }}">an app guide</a>, <a href="{{ '/guides/sample-template-guide/' | relative_url }}">a template guide</a>, <a href="{{ '/apps/sample-app/' | relative_url }}">an app page</a></li>
+    </ul>
+  </section>
+  {%- endif %}
+
 </div>

@@ -1,0 +1,25 @@
+{%- comment -%}
+  The email block, used on the home page and as the Training waitlist.
+
+  There is no server behind this site, so a real form needs a third-party
+  embed. Until one is chosen this block is a working mailto link, which
+  costs nothing and loses nobody. To switch to a real form later, replace
+  the paragraph holding the button and leave everything else alone.
+
+  Parameters, all optional:
+    title    the heading                     default: Get new work by email
+    line     the sentence under the heading
+    action   the button wording              default: Email to be added
+    subject  the email subject, already URL-escaped
+    note     a small line under the button
+{%- endcomment -%}
+<section class="signup">
+  <h2>{{ include.title | default: "Get new work by email" }}</h2>
+  {%- if include.line %}
+  <p>{{ include.line }}</p>
+  {%- endif %}
+  <p><a class="button" href="mailto:{{ site.email }}?subject={{ include.subject | default: 'Add%20me%20to%20the%20list' }}">{{ include.action | default: "Email to be added" }}</a></p>
+  {%- if include.note %}
+  <p class="signup__note">{{ include.note }}</p>
+  {%- endif %}
+</section>

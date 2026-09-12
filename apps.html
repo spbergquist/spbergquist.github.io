@@ -1,12 +1,41 @@
 ---
-updated: 2026-09-10
+updated: 2026-09-11
 title: Apps
 permalink: /apps/
 section: apps
 ---
+{%- comment -%}
+  The Apps index. Build spec section 5.2: one card per app with its name,
+  what it measures, platform, status and links.
+{%- endcomment -%}
 <div class="wrap">
   <header class="page-head">
     <h1 class="page-title">Apps</h1>
-    <p class="page-lede">Placeholder. The Apps index, with an entry for each app, is built in step 5.</p>
+    <p class="page-lede">Small mobile tools that each make one field measurement properly, built to reproduce a method that is already accepted.</p>
   </header>
+
+  {%- assign apps = site.apps | where_exp: "a", "a.sample != true" -%}
+  {%- if apps.size > 0 -%}
+  {%- assign apps = apps | sort: "title" -%}
+  <ul class="index-cards">
+    {%- for a in apps %}
+    <li class="index-card section-apps">
+      {%- if a.icon %}<img class="index-card__icon" src="{{ a.icon | relative_url }}" alt="" width="48" height="48">{% endif %}
+      <h2 class="index-card__title"><a href="{{ a.url | relative_url }}">{{ a.title }}</a></h2>
+      {%- if a.description %}
+      <p class="index-card__line">{{ a.description | strip_newlines }}</p>
+      {%- endif %}
+      <p class="index-meta">
+        {%- if a.platforms %}<span>{{ a.platforms | join: ", " }}</span>{% endif %}
+        {%- if a.status %}<span class="status">{{ a.status }}</span>{% endif %}
+      </p>
+    </li>
+    {%- endfor %}
+  </ul>
+  {%- else -%}
+  <div class="index-empty">
+    <p><strong>No apps listed yet.</strong></p>
+    <p>Each app gets its own page here, stating plainly what it measures, which accepted method it reproduces, and whether it has been validated yet, including when it has not.</p>
+  </div>
+  {%- endif %}
 </div>
