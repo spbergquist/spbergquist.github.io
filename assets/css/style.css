@@ -1042,6 +1042,64 @@ figcaption, .caption {
 
 
 
+/* 15. The splash --------------------------------------------------------------
+   Two seconds of every typeface the site will never use, resolving into the
+   one it does. Settled 12 September 2026: 200 ms a step, ten colours in
+   spread order, each face once.
+
+   All ten faces carry FLSplash names because they are cut down to the ten
+   characters in "fun.limited", and eight of the ten are licensed with a
+   Reserved Font Name that a modified version may not use. The original face
+   each one came from is named beside it below, and in the README in
+   /assets/fonts/splash/. Do not rename them back.                        */
+
+@font-face { font-family: "FLSplash Static";       /* Rubik Glitch    */ src: url("../fonts/splash/static.woff2")      format("woff2"); font-display: block; }
+@font-face { font-family: "FLSplash Dimensional";  /* Bungee Shade    */ src: url("../fonts/splash/dimensional.woff2") format("woff2"); font-display: block; }
+@font-face { font-family: "FLSplash Deco";         /* Monoton         */ src: url("../fonts/splash/deco.woff2")        format("woff2"); font-display: block; }
+@font-face { font-family: "FLSplash Pixel";        /* Press Start 2P  */ src: url("../fonts/splash/pixel.woff2")       format("woff2"); font-display: block; }
+@font-face { font-family: "FLSplash Typewriter";   /* Special Elite   */ src: url("../fonts/splash/typewriter.woff2")  format("woff2"); font-display: block; }
+@font-face { font-family: "FLSplash Script";       /* Homemade Apple  */ src: url("../fonts/splash/script.woff2")      format("woff2"); font-display: block; }
+@font-face { font-family: "FLSplash Heavy";        /* Stalinist One   */ src: url("../fonts/splash/heavy.woff2")       format("woff2"); font-display: block; }
+@font-face { font-family: "FLSplash Drip";         /* Creepster       */ src: url("../fonts/splash/drip.woff2")        format("woff2"); font-display: block; }
+@font-face { font-family: "FLSplash Poster";       /* Anton           */ src: url("../fonts/splash/poster.woff2")      format("woff2"); font-display: block; }
+@font-face { font-family: "FLSplash Terminal";     /* Space Mono      */ src: url("../fonts/splash/terminal.woff2")    format("woff2"); font-display: block; }
+
+/* While the splash is up the page underneath must not scroll away behind it. */
+.splash-open { overflow: hidden; }
+
+.splash {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--gutter);
+  background: var(--base);
+  transform: translateY(0);
+}
+.splash.is-lifting {
+  transform: translateY(-100%);
+  transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* Permanent Marker in ink is the resting state, and the state it lands on.
+   It shows from the first frame, so a visitor whose faces never arrive sees a
+   clean wordmark rather than a broken sequence. */
+.splash__mark {
+  margin: 0;
+  font-family: var(--font-wordmark);
+  font-size: clamp(2.25rem, 1.2rem + 6vw, 6rem);
+  line-height: 1.1;
+  color: var(--ink);
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* Nothing here should ever reach a printer. */
+@media print { .splash { display: none; } }
+
+
 /* 13. Print -------------------------------------------------------------------
    Studies and guides must print cleanly and stay citable: no menu, black
    text on white, and web addresses written out after links.             */

@@ -4,6 +4,12 @@
 {% include head.html %}
 </head>
 <body class="section-{{ page.section | default: 'none' }}">
+{%- comment -%}
+  The splash runs on the home page only, and once per browsing session. To put
+  it on every page instead, drop the condition; to retire it, delete these
+  three lines and the include.
+{%- endcomment -%}
+{%- if page.url == '/' %}{% include splash.html %}{% endif %}
 <a class="skip-link" href="#main">Skip to content</a>
 {% include nav.html %}
 <main id="main" class="site-main" tabindex="-1">

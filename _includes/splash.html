@@ -1,0 +1,132 @@
+{%- comment -%}
+  The fun.limited splash.
+
+  The word cycles through ten display faces and ten palette colours, one step
+  every 200 ms, and lands on Permanent Marker in ink. Ten steps is two seconds,
+  which is the length the original Google Sites version ran.
+
+  Settled 12 September 2026: 200 ms, all ten colours, spread order, each face
+  once, brightened ochre kept in.
+
+  Three things about how this is built:
+
+  * The overlay is created by this script, not written into the page. A visitor
+    with no JavaScript, and every search engine, sees the site with no splash
+    and nothing hidden behind one.
+  * It runs once per browsing session, so moving between pages does not set it
+    off again.
+  * It waits for the faces to download before flashing anything. A face that
+    has not arrived falls back silently, which is what made the original look
+    wrong on a slow connection. If the faces take longer than 1.2 seconds the
+    splash gives up and lifts, and the visitor simply sees the site.
+  * Every face is a file this site serves. Nothing depends on what happens to
+    be installed on the visitor's machine, so the sequence looks the same on
+    Windows, on a Mac and on an Android phone.
+{%- endcomment -%}
+<script>
+(function () {
+  "use strict";
+
+  // The ten colours in spread order: each step jumps to whichever colour sits
+  // furthest from the one before it, so no two neighbours look alike. Fixed
+  // rather than computed, so what ships is what was approved.
+  var COLOURS = ['#C2262A', '#2B8AFF', '#F4BA0E', '#0B63C5', '#B8860B',
+                 '#815CD4', '#FC4544', '#1F7A4D', '#5B3A9E', '#3CA46E'];
+
+  // All ten live in /assets/fonts/splash/ under FLSplash names; see the README
+  // there for why they are renamed. Impact and Courier New were dropped on
+  // 12 September 2026 because they are system fonts that Android does not
+  // have, so two of the ten would not have been the faces that were chosen.
+  var FACES = ['FLSplash Static', 'FLSplash Dimensional', 'FLSplash Deco',
+               'FLSplash Pixel', 'FLSplash Typewriter', 'FLSplash Script',
+               'FLSplash Heavy', 'FLSplash Drip', 'FLSplash Poster',
+               'FLSplash Terminal'];
+
+  var STEP = 200, HOLD = 400, LIFT = 700, FONT_WAIT = 1200, KEY = 'fl-splash-seen';
+
+  function seen() { try { return sessionStorage.getItem(KEY) === '1'; } catch (e) { return false; } }
+  function markSeen() { try { sessionStorage.setItem(KEY, '1'); } catch (e) {} }
+
+  if (seen()) { return; }
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    markSeen();
+    return;
+  }
+  markSeen();
+
+  var root = document.documentElement;
+  var el = document.createElement('div');
+  el.className = 'splash';
+  el.setAttribute('aria-hidden', 'true');
+  var mark = document.createElement('p');
+  mark.className = 'splash__mark';
+  mark.textContent = 'fun.limited';
+  el.appendChild(mark);
+
+  function begin() {
+    root.classList.add('splash-open');
+    (document.body || root).appendChild(el);
+  }
+  if (document.body) { begin(); }
+  else { document.addEventListener('DOMContentLoaded', begin); }
+
+  function finish() {
+    mark.style.fontFamily = '';
+    mark.style.color = '';
+    el.classList.add('is-lifting');
+    window.setTimeout(function () {
+      root.classList.remove('splash-open');
+      if (el.parentNode) { el.parentNode.removeChild(el); }
+    }, LIFT);
+  }
+
+  function run() {
+    // Deal the faces in a fresh order each visit, while the colours keep the
+    // approved sequence. Every face appears exactly once.
+    var deck = FACES.slice();
+    for (var i = deck.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = deck[i]; deck[i] = deck[j]; deck[j] = t;
+    }
+    var n = 0;
+    function step() {
+      mark.style.fontFamily = '"' + deck[n] + '", cursive';
+      mark.style.color = COLOURS[n];
+      n++;
+    }
+    step();
+    var id = window.setInterval(function () {
+      if (n >= COLOURS.length) {
+        window.clearInterval(id);
+        window.setTimeout(finish, HOLD);
+        return;
+      }
+      step();
+    }, STEP);
+  }
+
+  function ready() {
+    if (!document.fonts || !document.fonts.load) { finish(); return; }
+    var wanted = FACES.filter(function (f) { return f.indexOf('FLSplash') === 0; })
+      .map(function (f) { return document.fonts.load('1rem "' + f + '"', 'fun.limited'); });
+    var done = false;
+    var giveUp = window.setTimeout(function () {
+      if (!done) { done = true; finish(); }      // faces too slow: show nothing rather than the wrong thing
+    }, FONT_WAIT);
+    Promise.all(wanted).then(function () {
+      if (done) { return; }
+      done = true;
+      window.clearTimeout(giveUp);
+      run();
+    })['catch'](function () {
+      if (done) { return; }
+      done = true;
+      window.clearTimeout(giveUp);
+      finish();
+    });
+  }
+
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', ready); }
+  else { ready(); }
+})();
+</script>
