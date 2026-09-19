@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Join a campaign — DoorKnock</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --base: #F2F1EE; --surface: #E8E6E1; --rule: #DBD8D1;
+    --muted: #6B6A66; --ink: #1A1A18;
+    --apps: #0B63C5; --apps-tint: #D2E5FF;
+    --head: "Archivo", system-ui, sans-serif;
+    --body: "Open Sans", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--base); color: var(--ink); min-height: 100vh;
+    font: 16px/1.6 var(--body); font-variant-numeric: tabular-nums;
+    display: grid; place-items: center; padding: 16px;
+  }
+  main { width: 100%; max-width: 420px; }
+  h1 { font-family: var(--head); font-size: 25px; margin: 0 0 4px; font-weight: 700; }
+  .who { font-family: var(--head); font-size: 17px; font-weight: 600; margin: 0 0 2px; }
+  .area { color: var(--muted); margin: 0 0 22px; font-size: 15px; }
+  .card { border-radius: 10px; padding: 17px; background: var(--surface);
+          border-left: 3px solid var(--apps); }
+  .btn {
+    display: block; text-align: center; background: var(--apps); color: #fff;
+    text-decoration: none; padding: 13px 20px; border-radius: 7px;
+    font-family: var(--head); font-weight: 600; font-size: 16px;
+    border: 0; width: 100%; cursor: pointer;
+  }
+  .btn:hover { background: #094e9c; }
+  label { display: block; font-family: var(--head); font-size: 11px;
+          text-transform: uppercase; letter-spacing: .07em;
+          color: var(--muted); margin: 0 0 4px; font-weight: 600; }
+  .val { display: flex; gap: 8px; align-items: stretch; margin-bottom: 14px; }
+  .val code {
+    flex: 1; background: var(--base); border: 1px solid var(--rule); border-radius: 6px;
+    padding: 8px 10px; font-size: 13px; overflow-wrap: anywhere; min-width: 0;
+    font-family: ui-monospace, Consolas, monospace;
+  }
+  .val code.big { font-size: 21px; letter-spacing: .09em; font-weight: 600;
+                  background: var(--apps-tint); border-color: var(--apps-tint);
+                  text-align: center; }
+  .val button {
+    border: 1px solid var(--rule); background: var(--base); color: var(--ink);
+    border-radius: 6px; padding: 8px 11px; font: inherit; font-size: 13px; cursor: pointer;
+  }
+  .val button:hover { border-color: var(--apps); color: var(--apps); }
+  .note { color: var(--muted); font-size: 13.5px; margin: 16px 0 0; }
+  hr { border: 0; border-top: 1px solid var(--rule); margin: 18px 0; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Join a campaign</h1>
+  <p class="area" id="area">Reading the join code…</p>
+
+  <div class="card" id="card">
+    <div id="ready" hidden>
+      <p class="who" id="name"></p>
+      <p class="area" id="role" style="margin-bottom:14px"></p>
+      <button class="btn" id="open">Open in DoorKnock</button>
+      <p class="note">
+        If nothing happens, DoorKnock is not installed on this phone yet. Ask your
+        coordinator which store link to use, then come back to this page.
+      </p>
+      <hr>
+      <div id="codewrap">
+        <label>Your code</label>
+        <div class="val"><code id="code" class="big"></code><button data-copy="code">Copy</button></div>
+      </div>
+      <label>Campaign link</label>
+      <div class="val"><code id="url"></code><button data-copy="url">Copy</button></div>
+      <p class="note">
+        This code is yours alone. Knocks you log are signed with your name, so do not
+        pass it to anyone else.
+      </p>
+    </div>
+
+    <div id="nothing" hidden>
+      <p style="margin:0">
+        This page needs a join code. Open the coordinator page for your campaign,
+        find the <b>Join</b> panel, pick your name, and scan the code it shows with
+        your phone's camera.
+      </p>
+    </div>
+  </div>
+
+  <p class="note">
+    The campaign link and your code travel in the part of the address after the
+    <code>#</code>, which a browser never sends to a server. They stay on this phone.
+  </p>
+</main>
+
+<script>
+(function () {
+  function decode(s) {
+    s = s.replace(/-/g, '+').replace(/_/g, '/');
+    while (s.length % 4) { s += '='; }
+    try { return decodeURIComponent(escape(atob(s))); } catch (e) { return ''; }
+  }
+
+  var parts = {};
+  location.hash.replace(/^#/, '').split('&').forEach(function (bit) {
+    var i = bit.indexOf('=');
+    if (i > 0) { parts[bit.slice(0, i)] = bit.slice(i + 1); }
+  });
+
+  var url = decode(parts.u || '');
+  var code = parts.c ? decode(parts.c) : '';
+  var area = parts.a ? decode(parts.a) : '';
+  var name = parts.n ? decode(parts.n) : '';
+
+  if (!/^https:\/\/script\.google\.com\//.test(url)) {
+    document.getElementById('area').textContent = 'No campaign in this link.';
+    document.getElementById('nothing').hidden = false;
+    return;
+  }
+
+  document.getElementById('area').textContent = area || 'Your coordinator set this up.';
+  document.getElementById('name').textContent = name || 'Ready to join';
+  document.getElementById('role').textContent = name
+    ? 'Your coordinator added you to this campaign.' : '';
+  document.getElementById('url').textContent = url;
+  if (code) {
+    document.getElementById('code').textContent = code;
+  } else {
+    document.getElementById('codewrap').hidden = true;
+  }
+  document.getElementById('ready').hidden = false;
+
+  document.getElementById('open').onclick = function () {
+    location.href = 'doorknock://join?u=' + encodeURIComponent(url) +
+                    (code ? '&c=' + encodeURIComponent(code) : '') +
+                    (name ? '&n=' + encodeURIComponent(name) : '');
+  };
+
+  Array.prototype.forEach.call(document.querySelectorAll('[data-copy]'), function (b) {
+    b.onclick = function () {
+      var text = document.getElementById(b.getAttribute('data-copy')).textContent;
+      var was = b.textContent;
+      function done() { b.textContent = 'Copied'; setTimeout(function () { b.textContent = was; }, 1400); }
+      if (navigator.clipboard) { navigator.clipboard.writeText(text).then(done, done); }
+      else { done(); }
+    };
+  });
+})();
+</script>
+</body>
+</html>

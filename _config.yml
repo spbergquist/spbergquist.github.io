@@ -57,6 +57,12 @@ collections:
 exclude:
   - README.md
   - CNAME
+  # The site now lives in C:\Users\spber\OneDrive\fun.limited\website
+  # and working files sit beside it in fun.limited, outside what gets
+  # uploaded. This line is only a safety net in case a downloads folder
+  # ever lands inside website. Excluding a folder keeps it off the built
+  # site; it does NOT remove it from the public repository.
+  - "Claude outputs"
   - Gemfile
   - Gemfile.lock
   - node_modules

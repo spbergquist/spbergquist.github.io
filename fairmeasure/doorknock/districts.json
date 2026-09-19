@@ -1,0 +1,101 @@
+{
+ "version": 1,
+ "built": "2026-09-19",
+ "builtText": "19 September 2026",
+ "baseUrl": "https://spbergquist.github.io/fairmeasure/doorknock",
+ "templateUrl": "",
+ "countries": [
+  {
+   "code": "canada",
+   "name": "Canada",
+   "levels": [
+    {
+     "code": "federal",
+     "name": "Federal riding",
+     "districts": [
+      {
+       "slug": "north-vancouver-capilano-bc",
+       "name": "North Vancouver—Capilano",
+       "region": "BC",
+       "area": "North Vancouver—Capilano (328.7 sq km)",
+       "stops": 22850,
+       "doors": 55967,
+       "markers": 658,
+       "bytes": 303438,
+       "bounds": [
+        49.3018422,
+        -123.1680562,
+        49.3690183,
+        -123.0356707
+       ],
+       "url": "https://spbergquist.github.io/fairmeasure/doorknock/packs/north-vancouver-capilano-bc.zip"
+      }
+     ]
+    },
+    {
+     "code": "provincial",
+     "name": "Provincial or territorial riding",
+     "districts": [
+      {
+       "slug": "north-vancouver-lonsdale-bc",
+       "name": "North Vancouver-Lonsdale",
+       "region": "BC",
+       "area": "North Vancouver-Lonsdale (22.1 sq km)",
+       "stops": 9333,
+       "doors": 33323,
+       "markers": 413,
+       "bytes": 120478,
+       "bounds": [
+        49.3018422,
+        -123.1435162,
+        49.3355915,
+        -123.0393027
+       ],
+       "url": "https://spbergquist.github.io/fairmeasure/doorknock/packs/north-vancouver-lonsdale-bc.zip"
+      }
+     ]
+    },
+    {
+     "code": "local",
+     "name": "Local (city, town, district, village)",
+     "districts": [
+      {
+       "slug": "nanaimo-bc",
+       "name": "Nanaimo",
+       "region": "BC",
+       "area": "Nanaimo (122.2 sq km)",
+       "stops": 30243,
+       "doors": 48187,
+       "markers": 664,
+       "bytes": 395893,
+       "bounds": [
+        49.0974397,
+        -124.0646095,
+        49.2483276,
+        -123.8623287
+       ],
+       "url": "https://spbergquist.github.io/fairmeasure/doorknock/packs/nanaimo-bc.zip"
+      },
+      {
+       "slug": "north-vancouver-bc",
+       "name": "North Vancouver",
+       "region": "BC",
+       "area": "North Vancouver (16.6 sq km)",
+       "stops": 8120,
+       "doors": 31386,
+       "markers": 301,
+       "bytes": 101699,
+       "bounds": [
+        49.3018422,
+        -123.1025309,
+        49.3355915,
+        -123.0393027
+       ],
+       "url": "https://spbergquist.github.io/fairmeasure/doorknock/packs/north-vancouver-bc.zip"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
