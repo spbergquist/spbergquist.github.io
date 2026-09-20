@@ -60,11 +60,13 @@
   ol.steps p { margin: 3px 0 0; color: var(--muted); font-size: 15px; }
   .cta { margin: 30px 0 8px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
   .btn {
-    display: inline-block; background: var(--apps); color: #fff;
+    display: inline-block; background: var(--apps); color: var(--base);
     text-decoration: none; padding: 12px 22px; border-radius: 6px;
     font-family: var(--head); font-weight: 600; font-size: 15px;
   }
-  .btn:hover { background: #094e9c; }
+  /* Shifts the cobalt it already has. The palette has no darker
+     cobalt, and a near miss is worse than no change at all. */
+  .btn:hover { filter: brightness(1.12); }
   .meta { color: var(--muted); font-size: 14px; }
   .holds { display: grid; gap: 14px; grid-template-columns: 1fr 1fr; margin: 0; padding: 0; }
   @media (max-width: 560px) { .holds { grid-template-columns: 1fr; } }
@@ -106,7 +108,7 @@
 
     <div class="cta">
       <a class="btn" href="https://docs.google.com/spreadsheets/d/1IuCQ1BN9sq5llbehK0wgkbM1a-2Bp_Ad5OTjR4kiiFY/copy">Make a copy of the template</a>
-      <span class="meta">4 areas ready &middot; list built 19 September 2026</span>
+      <span class="meta">4 areas ready &middot; list built 20 September 2026</span>
     </div>
   </header>
 
@@ -188,7 +190,7 @@
   </section>
 
   <footer>
-    Area list at <code>https://spbergquist.github.io/fairmeasure/doorknock/districts.json</code>. Built 19 September 2026.
+    Area list at <code>https://spbergquist.github.io/fairmeasure/doorknock/districts.json</code>. Built 20 September 2026.
   </footer>
 
 </div>
