@@ -18,14 +18,14 @@
        "name": "North Vancouver—Capilano",
        "region": "BC",
        "area": "North Vancouver—Capilano (328.7 sq km)",
-       "stops": 22850,
-       "doors": 55967,
+       "stops": 23532,
+       "doors": 56650,
        "markers": 658,
-       "bytes": 303103,
+       "bytes": 316251,
        "bounds": [
         49.3018422,
         -123.1680562,
-        49.3690183,
+        49.369918,
         -123.0356707
        ],
        "url": "https://spbergquist.github.io/fairmeasure/doorknock/packs/north-vancouver-capilano-bc.zip"
@@ -41,14 +41,14 @@
        "name": "North Vancouver-Lonsdale",
        "region": "BC",
        "area": "North Vancouver-Lonsdale (22.1 sq km)",
-       "stops": 9333,
-       "doors": 33323,
+       "stops": 9926,
+       "doors": 33916,
        "markers": 413,
-       "bytes": 120130,
+       "bytes": 131820,
        "bounds": [
         49.3018422,
         -123.1435162,
-        49.3355915,
+        49.3357486,
         -123.0393027
        ],
        "url": "https://spbergquist.github.io/fairmeasure/doorknock/packs/north-vancouver-lonsdale-bc.zip"
@@ -81,10 +81,10 @@
        "name": "North Vancouver",
        "region": "BC",
        "area": "North Vancouver (16.6 sq km)",
-       "stops": 8120,
-       "doors": 31386,
+       "stops": 8721,
+       "doors": 31987,
        "markers": 301,
-       "bytes": 101526,
+       "bytes": 112721,
        "bounds": [
         49.3018422,
         -123.1025309,
